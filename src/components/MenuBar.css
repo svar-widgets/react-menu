@@ -1,0 +1,28 @@
+.wx-menubar.wx-UfhPCLL4 {
+  display: flex;
+  position: relative;
+  width: fit-content;
+}
+
+.wx-item.wx-UfhPCLL4 {
+  background-color: transparent;
+  border: none;
+  color: var(--wx-color-font);
+  box-sizing: border-box;
+  height: 36px;
+  line-height: 30px;
+  padding: 2px 12px;
+  font-family: var(--wx-font-family);
+  font-weight: var(--wx-font-weight);
+  font-size: var(--wx-font-size);
+
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+}
+
+.wx-active.wx-UfhPCLL4,
+.wx-item.wx-UfhPCLL4:hover {
+  background-color: var(--wx-background-alt);
+  border-radius: var(--wx-button-border-radius);
+}

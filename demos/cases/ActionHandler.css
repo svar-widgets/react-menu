@@ -1,0 +1,12 @@
+.item.wx-PP9LCPOn {
+  width: 240px;
+  border: var(--wx-border);
+  text-align: center;
+  margin: 10px;
+  padding: 20px 40px;
+  white-space: nowrap;
+}
+
+.disabled.wx-PP9LCPOn {
+  background: var(--wx-background-alt);
+}

@@ -1,0 +1,15 @@
+.box.wx-WCEK9S2T,
+.double-box.wx-WCEK9S2T {
+  width: 400px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  border: var(--wx-border);
+}
+.double-box.wx-WCEK9S2T {
+  line-height: 70px;
+  height: 200px;
+}
+.double-box > div {
+  display: inline;
+}

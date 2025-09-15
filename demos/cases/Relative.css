@@ -1,0 +1,12 @@
+.wrapper.wx-81VopRQQ {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: row;
+}
+.demo-box.wx-81VopRQQ {
+  position: relative;
+  margin-top: 20px;
+}

@@ -1,0 +1,12 @@
+.item.wx-JDOOrRxQ {
+  width: 240px;
+  border: var(--wx-border);
+  text-align: center;
+  margin: 10px;
+  padding: 20px 40px;
+  white-space: nowrap;
+}
+
+.disabled.wx-JDOOrRxQ {
+  background: var(--wx-background-alt);
+}

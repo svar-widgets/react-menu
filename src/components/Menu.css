@@ -1,0 +1,17 @@
+.wx-menu.wx-XMmAGqVx {
+  position: absolute;
+  box-shadow: var(--wx-shadow-light);
+
+  min-width: 125px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  border-radius: var(--wx-border-radius);
+  background-color: var(--wx-background);
+  padding: 4px 0;
+}
+
+.wx-separator.wx-XMmAGqVx {
+  width: 100%;
+  border-top: var(--wx-border-medium);
+}

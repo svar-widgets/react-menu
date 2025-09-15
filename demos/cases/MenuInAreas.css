@@ -1,0 +1,17 @@
+.buttons.wx-KhJ1Z5NC {
+  margin: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.demo-box.wx-KhJ1Z5NC {
+  padding: 40px;
+}
+
+.toolbar.wx-KhJ1Z5NC {
+  padding: 20px;
+}
+
+.toolbar.wx-KhJ1Z5NC:first-child {
+  float: right;
+}
