@@ -1,5 +1,5 @@
 <div align="center">
-	
+
 # SVAR React Menu
 
 [![npm](https://img.shields.io/npm/v/@svar-ui/react-menu.svg)](https://www.npmjs.com/package/@svar-ui/react-menu)
@@ -17,7 +17,7 @@
 **SVAR React Menu** is a flexible menu component for adding navigation and interaction menus to your React applications. The component is easy-to-customize, compatible with React 18 and 19, and complements [SVAR React Core](https://github.com/svar-widgets/react-core/) library.
 
 <div align="center">
-	
+
 <img src="https://svar.dev/images/github/github-menu.png" alt="React Menu Component" style="width: 600px;">
 
 </div>
@@ -36,7 +36,7 @@ To use the widget, simply import the package and include the component in to .js
 
 ```jsx
 	import { Menu } from "@svar-ui/react-menu";
-    import "@svar-ui/react-menu/style.css";
+  import "@svar-ui/react-menu/all.css";
 
     function MyComponent(){
 	    const options = [
