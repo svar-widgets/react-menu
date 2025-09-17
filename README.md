@@ -36,6 +36,7 @@ To use the widget, simply import the package and include the component in to .js
 
 ```jsx
 	import { Menu } from "@svar-ui/react-menu";
+    import "@svar-ui/react-menu/style.css";
 
     function MyComponent(){
 	    const options = [
