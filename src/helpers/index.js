@@ -30,13 +30,16 @@ export function filterMenu(data, cb) {
 let uid = 1;
 export function prepareMenuData(data) {
   return mapData(data, (a) => {
-    return { ...a, id: a.id || uid++ };
+    // [deprecated] option.type to be deprecated in 3.0
+    const opt = { ...a, id: a.id || uid++ };
+    if (opt.type) opt.comp = opt.type;
+    return opt;
   });
 }
 
 const handlers = {};
 export function getItemHandler(type) {
-  return handlers[type];
+  return handlers[type] || type;
 }
 export function registerMenuItem(type, handler) {
   handlers[type] = handler;

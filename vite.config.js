@@ -54,7 +54,6 @@ export default defineConfig(({ command, mode }) => {
         outDir: 'dist-full',
         lib: {
           entry: resolve(__dirname, 'src/full-css.js'),
-          name: 'ReactToolbarFullCSS',
           fileName: 'index',
           formats: ['es'],
         },
@@ -70,7 +69,6 @@ export default defineConfig(({ command, mode }) => {
       lib: {
         //eslint-disable-next-line no-undef
         entry: resolve(__dirname, 'src/index.js'),
-        name: 'ReactToolbar',
         fileName: (format) => (format === 'cjs' ? 'index.cjs' : 'index.es.js'),
         formats: ['es', 'cjs'],
       },

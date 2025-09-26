@@ -25,6 +25,7 @@ export default [
         clearTimeout: 'readonly',
         requestAnimationFrame: 'readonly',
         ResizeObserver: 'readonly',
+        getComputedStyle: 'readonly',
       },
     },
     plugins: {

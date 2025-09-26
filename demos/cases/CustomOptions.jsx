@@ -1,28 +1,24 @@
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import { Button } from '@svar-ui/react-core';
 import { DropDownMenu, registerMenuItem } from '../../src/index';
 import { getTeam } from '../data';
-import ButtonMenuItem from '../items/ButtonMenuItem.jsx';
-import UserMenuItem from '../items/UserMenuItem.jsx';
+import ButtonMenuItem from '../custom/ButtonMenuItem.jsx';
+import UserMenuItem from '../custom/UserMenuItem.jsx';
+
+registerMenuItem('user', UserMenuItem);
 
 function CustomOptions() {
   const styledOptions = useMemo(
     () => [
       { id: 1, text: 'Add User', subtext: 'Ctrl+A' },
-      { id: 2, text: 'Rerfresh', subtext: 'Ctrl+R' },
+      { id: 2, text: 'Refresh', subtext: 'Ctrl+R' },
       { id: 3, text: 'Delete User', css: 'danger' },
     ],
     [],
   );
 
   const options = useMemo(() => getTeam(), []);
-
-  const registeredRef = useRef(false);
-  if (!registeredRef.current) {
-    registerMenuItem('button', ButtonMenuItem);
-    registerMenuItem('user', UserMenuItem);
-    registeredRef.current = true;
-  }
+  options[3].comp = ButtonMenuItem;
 
   return (
     <>

@@ -21,9 +21,9 @@ export default function ActionHandler() {
   );
 
   const clicked = useCallback((ev) => {
-    const { context, action } = ev;
+    const { context, option } = ev;
     setMessage(
-      action ? `${action.id} for ${context.type} ${context.id}` : 'closed',
+      option ? `${option.id} for ${context.type} ${context.id}` : 'closed',
     );
   }, []);
 
@@ -37,11 +37,11 @@ export default function ActionHandler() {
     [items],
   );
 
-  const filterMenu = useCallback((menu, item) => {
+  const filterMenu = useCallback((option, item) => {
     if (
       item.type === 'project' &&
-      typeof menu.id === 'string' &&
-      !menu.id.startsWith('add-task')
+      typeof option.id === 'string' &&
+      !option.id.startsWith('add-task')
     )
       return false;
 

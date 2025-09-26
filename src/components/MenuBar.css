@@ -4,7 +4,7 @@
   width: fit-content;
 }
 
-.wx-item.wx-UfhPCLL4 {
+.wx-option.wx-UfhPCLL4 {
   background-color: transparent;
   border: none;
   color: var(--wx-color-font);
@@ -22,7 +22,7 @@
 }
 
 .wx-active.wx-UfhPCLL4,
-.wx-item.wx-UfhPCLL4:hover {
+.wx-option.wx-UfhPCLL4:hover {
   background-color: var(--wx-background-alt);
   border-radius: var(--wx-button-border-radius);
 }

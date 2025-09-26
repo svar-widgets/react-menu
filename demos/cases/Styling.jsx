@@ -32,7 +32,7 @@ function Styling() {
         </DropDownMenu>
       </div>
       <div className="wx-dXAQDMmf demo-box">
-        <h3>Style for menu item</h3>
+        <h3>Style for menu option</h3>
         <DropDownMenu options={options1}>
           <Button type="primary">Click me</Button>
         </DropDownMenu>

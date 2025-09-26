@@ -7,8 +7,8 @@ export default function MenuBar() {
   const [message, setMessage] = useState('');
 
   const clicked = useCallback((ev) => {
-    const action = ev.action;
-    setMessage(action ? `clicked on ${action.id}` : 'closed');
+    const option = ev.option;
+    setMessage(option ? `clicked on ${option.id}` : 'closed');
   }, []);
 
   return (

@@ -35,19 +35,19 @@ SVAR React Menu can be used as:
 To use the widget, simply import the package and include the component in to .jsx file:
 
 ```jsx
-	import { Menu } from "@svar-ui/react-menu";
-  import "@svar-ui/react-menu/all.css";
+    import { Menu } from "@svar-ui/react-menu";
+    import "@svar-ui/react-menu/all.css";
 
     function MyComponent(){
-	    const options = [
-			{ id: 'add-task', text: 'Add', icon: 'wxi wxi-plus', data: [
-        		{ id: 'add-task:child', text: 'Child task' },
-        		{ id: 'add-task:above', text: 'Task above' },
-        		{ id: 'add-task:below', text: 'Task below' },
-      		] },
-    		{ type: 'separator' },
-		    { id: 'edit-task', text: 'Edit', icon: 'wxi wxi-edit' },
-		];
+        const options = [
+            { id: 'add-task', text: 'Add', icon: 'wxi wxi-plus', data: [
+                { id: 'add-task:child', text: 'Child task' },
+                { id: 'add-task:above', text: 'Task above' },
+                { id: 'add-task:below', text: 'Task below' },
+            ] },
+            { type: 'separator' },
+            { id: 'edit-task', text: 'Edit', icon: 'wxi wxi-edit' },
+        ];
 
         return (<Menu options={options} />);
     }

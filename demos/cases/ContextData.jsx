@@ -9,10 +9,10 @@ export default function ContextData() {
   const [message, setMessage] = useState('');
 
   function clicked(ev) {
-    const { context, action } = ev;
+    const { context, option } = ev;
     setMessage(
-      action
-        ? `${action.id} for ${context.type || 'task'} ${context.id}`
+      option
+        ? `${option.id} for ${context.type || 'task'} ${context.id}`
         : 'closed',
     );
   }

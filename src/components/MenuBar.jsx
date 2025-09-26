@@ -18,23 +18,24 @@ function MenuBar(props) {
     onClick && onClick(ev);
   }
 
-  function setMenu(ev, item, trigger) {
-    // if the item has a submenu, show it and enable hover mode
-    if (item.data && item.data.length) {
+  function setMenu(ev, option, trigger) {
+    // if the option has a submenu, show it and enable hover mode
+    if (option.data && option.data.length) {
       if (active && trigger) {
-        // second click on item with submenu disables hover mode
+        // second click on option with submenu disables hover mode
         setActive(null);
       } else {
-        setMenuOptions(item.data);
-        setActive(item.id);
-        menu.current.show(ev, item);
+        setMenuOptions(option.data);
+        setActive(option.id);
+        menu.current.show(ev, option);
       }
     } else {
       // hide the submenu
       menu.current.show(null);
       // if it was the click action, dispatch it and end hover mode
       if (trigger) {
-        onClick && onClick({ action: item });
+        // [deprecated] action will be deprecated in 3.0
+        onClick && onClick({ action: option, option });
         setActive(null);
       } else {
         // do not remove active flag, to preserve the hover mode
@@ -43,21 +44,21 @@ function MenuBar(props) {
     }
   }
 
-  function onHover(ev, item) {
-    if (active) setMenu(ev, item);
+  function onHover(ev, option) {
+    if (active) setMenu(ev, option);
   }
 
   return (
     <>
       <div className={`wx-UfhPCLL4 wx-menubar ${css}`}>
-        {finalOptions.map((item) => (
+        {finalOptions.map((option) => (
           <button
-            key={item.id}
-            className={`wx-UfhPCLL4 wx-item ${active === item.id ? 'wx-active' : ''}`}
-            onMouseEnter={(ev) => onHover(ev, item)}
-            onClick={(ev) => setMenu(ev, item, true)}
+            key={option.id}
+            className={`wx-UfhPCLL4 wx-option ${active === option.id ? 'wx-active' : ''}`}
+            onMouseEnter={(ev) => onHover(ev, option)}
+            onClick={(ev) => setMenu(ev, option, true)}
           >
-            {item.text}
+            {option.text}
           </button>
         ))}
       </div>

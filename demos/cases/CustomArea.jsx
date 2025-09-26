@@ -23,8 +23,8 @@ export default function CustomArea() {
   const [submessage] = useState('');
 
   function clicked(ev) {
-    const { context, action } = ev;
-    setMessage(action ? `${action.id} for item #${context}` : 'closed');
+    const { context, option } = ev;
+    setMessage(option ? `${option.id} for item #${context}` : 'closed');
   }
 
   const items = [

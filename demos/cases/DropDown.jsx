@@ -9,8 +9,8 @@ function DropDown() {
   const [message, setMessage] = useState('');
 
   function clicked(ev) {
-    const action = ev.action;
-    setMessage(action ? `clicked on ${action.id}` : 'closed');
+    const option = ev.option;
+    setMessage(option ? `clicked on ${option.id}` : 'closed');
   }
 
   return (

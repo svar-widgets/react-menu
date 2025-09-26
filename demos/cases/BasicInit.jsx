@@ -14,8 +14,8 @@ function BasicInit() {
   const [message, setMessage] = useState('');
 
   function clicked(ev) {
-    const action = ev.action;
-    setMessage(action ? `clicked on ${action.id}` : 'closed');
+    const option = ev.option;
+    setMessage(option ? `clicked on ${option.id}` : 'closed');
     setMenu1(null);
     setMenu2(null);
     setMenu3(null);

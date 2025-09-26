@@ -7,7 +7,7 @@ import {
   useCallback,
 } from 'react';
 import { clickOutside, calculatePosition } from '@svar-ui/lib-dom';
-import MenuItem from './MenuItem.jsx';
+import MenuOption from './MenuOption.jsx';
 import { prepareMenuData } from '../helpers';
 import './Menu.css';
 
@@ -29,7 +29,7 @@ function Menu({
 
   const selfRef = useRef(null);
   const [showSub, setShowSub] = useState(false);
-  const [activeItem, setActiveItem] = useState(null);
+  const [activeOption, setActiveOption] = useState(null);
 
   const updatePosition = useCallback(() => {
     const result = calculatePosition(selfRef.current, parent, at, left, top);
@@ -50,12 +50,13 @@ function Menu({
   }, []);
 
   const cancel = useCallback(() => {
-    onClick && onClick({ action: null });
+    // [deprecated] action will be deprecated in 3.0
+    onClick && onClick({ action: null, option: null });
   }, [onClick]);
 
   const onShow = useCallback((id, el) => {
     setShowSub(id);
-    setActiveItem(el);
+    setActiveOption(el);
   }, []);
 
   const finalOptions = useMemo(() => prepareMenuData(options), [options]);
@@ -84,30 +85,31 @@ function Menu({
       }}
       onMouseLeave={onLeave}
     >
-      {finalOptions.map((item) => (
-        <Fragment key={item.id}>
-          {item.type === 'separator' ? (
+      {finalOptions.map((option) => (
+        <Fragment key={option.id}>
+          {option.comp === 'separator' ? (
             <div className="wx-XMmAGqVx wx-separator"></div>
           ) : (
-            <MenuItem
-              item={item}
+            <MenuOption
+              option={option}
               onShow={onShow}
               onClick={(ev) => {
-                if (!item.data && !ev.defaultPrevented) {
-                  const pack = { context, action: item, event: ev };
-                  if (item.handler) item.handler(pack);
+                if (!option.data && !ev.defaultPrevented) {
+                  // [deprecated] action will be deprecated in 3.0
+                  const pack = { context, action: option, option, event: ev };
+                  if (option.handler) option.handler(pack);
                   onClick && onClick(pack);
                   ev.stopPropagation();
                 }
               }}
             />
           )}
-          {item.data && showSub === item.id ? (
+          {option.data && showSub === option.id ? (
             <Menu
               css={css}
-              options={item.data}
+              options={option.data}
               at="right-overlap"
-              parent={activeItem}
+              parent={activeOption}
               context={context}
               onClick={onClick}
             />

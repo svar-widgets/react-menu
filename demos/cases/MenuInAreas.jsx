@@ -19,11 +19,11 @@ export default function MenuInAreas() {
   }
 
   const clicked = useCallback((ev) => {
-    const { context, action } = ev;
-    if (action) {
+    const { context, option } = ev;
+    if (option) {
       setActive((prev) => {
         const next = [...prev];
-        next[context] = action.id;
+        next[context] = option.id;
         return next;
       });
     }

@@ -9,11 +9,11 @@ export default function ActionMenu() {
   const byId = useCallback((id) => options.find((a) => a.id === id), [options]);
 
   const filterMenu = useCallback(
-    (v, item) => {
-      if (v.id === active[item]) {
-        v.icon = 'wxi-check';
+    (option, item) => {
+      if (option.id === active[item]) {
+        option.icon = 'wxi-check';
       } else {
-        v.icon = 'wxi-empty';
+        option.icon = 'wxi-empty';
       }
       return true;
     },
@@ -21,11 +21,11 @@ export default function ActionMenu() {
   );
 
   const clicked = useCallback((ev) => {
-    const { context, action } = ev;
-    if (action) {
+    const { context, option } = ev;
+    if (option) {
       setActive((prev) => {
         const next = [...prev];
-        next[context] = action.id;
+        next[context] = option.id;
         return next;
       });
     }
