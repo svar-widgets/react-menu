@@ -54,7 +54,7 @@ function MenuBar(props) {
         {finalOptions.map((option) => (
           <button
             key={option.id}
-            className={`wx-UfhPCLL4 wx-option ${active === option.id ? 'wx-active' : ''}`}
+            className={`wx-UfhPCLL4 wx-option ${active === option.id ? 'wx-active' : ''} ${option.disabled ? 'wx-disabled' : ''}`}
             onMouseEnter={(ev) => onHover(ev, option)}
             onClick={(ev) => setMenu(ev, option, true)}
           >

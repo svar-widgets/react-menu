@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button, ModalArea, SideArea, Popup } from '@svar-ui/react-core';
 import { ActionMenu } from '../../src/index';
 import { getProjects } from '../data';
@@ -18,7 +18,7 @@ export default function MenuInAreas() {
     return true;
   }
 
-  const clicked = useCallback((ev) => {
+  const clicked = (ev) => {
     const { context, option } = ev;
     if (option) {
       setActive((prev) => {
@@ -27,7 +27,7 @@ export default function MenuInAreas() {
         return next;
       });
     }
-  }, []);
+  };
 
   const menu1 = useRef(null);
   const menu2 = useRef(null);

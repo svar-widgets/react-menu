@@ -10,6 +10,7 @@ import MenuPositions from './cases/MenuPositions.jsx';
 import Relative from './cases/Relative.jsx';
 import MenuInAreas from './cases/MenuInAreas.jsx';
 import Styling from './cases/Styling.jsx';
+import DisabledOption from './cases/DisabledOption.jsx';
 
 export const links = [
   ['/base/:skin', 'Menu basic', BasicInit, 'BasicInit'],
@@ -24,4 +25,5 @@ export const links = [
   ['/relative/:skin', 'Relative scroll', Relative, 'Relative'],
   ['/areas/:skin', 'Menu in modals', MenuInAreas, 'MenuInAreas'],
   ['/styling/:skin', 'Styling', Styling, 'Styling'],
+  ['/disabled/:skin', 'Disabled option', DisabledOption, 'Disabled option'],
 ];

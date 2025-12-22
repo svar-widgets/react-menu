@@ -10,9 +10,8 @@ const ContextMenu = forwardRef(function ContextMenu(props, ref) {
     filter = null,
     css = '',
     children,
+    onClick,
   } = props;
-
-  const onClick = props.onClick ?? props.onclick;
 
   const menu = useRef(null);
 

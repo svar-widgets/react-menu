@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { Button } from '@svar-ui/react-core';
 import { ActionMenu as LibActionMenu } from '../../src/index';
 import { getProjects } from '../data';
@@ -6,21 +6,18 @@ import { getProjects } from '../data';
 export default function ActionMenu() {
   const options = useMemo(() => getProjects(), []);
   const [active, setActive] = useState(['a', 'b', 'c', 'd']);
-  const byId = useCallback((id) => options.find((a) => a.id === id), [options]);
+  const byId = (id) => options.find((a) => a.id === id);
 
-  const filterMenu = useCallback(
-    (option, item) => {
+  const filterMenu = (option, item) => {
       if (option.id === active[item]) {
         option.icon = 'wxi-check';
       } else {
         option.icon = 'wxi-empty';
       }
       return true;
-    },
-    [active],
-  );
+    };
 
-  const clicked = useCallback((ev) => {
+  const clicked = (ev) => {
     const { context, option } = ev;
     if (option) {
       setActive((prev) => {
@@ -29,7 +26,7 @@ export default function ActionMenu() {
         return next;
       });
     }
-  }, []);
+  };
 
   const menu = useRef(null);
 

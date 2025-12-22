@@ -20,7 +20,6 @@ export default function CustomArea() {
   ];
 
   const [message, setMessage] = useState('');
-  const [submessage] = useState('');
 
   function clicked(ev) {
     const { context, option } = ev;
@@ -41,7 +40,7 @@ export default function CustomArea() {
   return (
     <>
       <div className="wx-JTc3FJgI demo-status">
-        {message} {submessage}
+        {message}
       </div>
 
       <ActionMenu at="right" options={options} onClick={clicked} ref={menu} />

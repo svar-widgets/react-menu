@@ -16,7 +16,7 @@ function MenuOption({ onClick, onShow, option }) {
   return (
     <div
       ref={element}
-      className={`wx-cDCz9rZQ wx-option ${option.css || ''}`}
+      className={`wx-cDCz9rZQ wx-option ${option.css || ''} ${option.disabled ? 'wx-disabled' : ''}`}
       data-id={option.id}
       onMouseEnter={onHover}
       onClick={onClick}

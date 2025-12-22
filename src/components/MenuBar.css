@@ -26,3 +26,7 @@
   background-color: var(--wx-background-alt);
   border-radius: var(--wx-button-border-radius);
 }
+.wx-disabled.wx-UfhPCLL4 {
+  pointer-events: none;
+  color: var(--wx-color-font-disabled);
+}

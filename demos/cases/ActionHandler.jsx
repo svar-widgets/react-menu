@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 import { ContextMenu } from '../../src/index';
 import { getOptions } from '../data';
 import './ActionHandler.css';
@@ -20,24 +20,21 @@ export default function ActionHandler() {
     [],
   );
 
-  const clicked = useCallback((ev) => {
+  const clicked = (ev) => {
     const { context, option } = ev;
     setMessage(
       option ? `${option.id} for ${context.type} ${context.id}` : 'closed',
     );
-  }, []);
+  }
 
-  const getItem = useCallback(
-    (id) => {
-      const item = items.find((a) => a.id == id);
+  const getItem = (id) => {
+    const item = items.find((a) => a.id == id);
 
-      if (item.disabled) return null;
-      return item;
-    },
-    [items],
-  );
+    if (item.disabled) return null;
+    return item;
+  };
 
-  const filterMenu = useCallback((option, item) => {
+  const filterMenu = (option, item) => {
     if (
       item.type === 'project' &&
       typeof option.id === 'string' &&
@@ -46,7 +43,7 @@ export default function ActionHandler() {
       return false;
 
     return true;
-  }, []);
+  };
 
   return (
     <>
