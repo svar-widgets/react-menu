@@ -1,13 +1,23 @@
 import { useMemo, useRef, useCallback } from 'react';
+import { setID } from '@svar-ui/lib-dom';
 import { getItemHandler } from '../helpers';
 import './MenuOption.css';
 
-function MenuOption({ onClick, onShow, option }) {
+function MenuOption({ onClick: onClickProp, onShow, option }) {
   const element = useRef(null);
 
   const onHover = useCallback(() => {
     onShow(option.data ? option.id : false, element.current);
   }, [onShow, option]);
+
+  const onClick = useCallback((ev) => {
+    if (option.data) {
+      ev.stopPropagation();
+      onShow(option.id, element.current);
+      return;
+    }
+    onClickProp(ev);
+  }, [onClickProp, onShow, option]);
 
   const SubComponent = useMemo(() => {
     return option && option.comp ? getItemHandler(option.comp) : null;
@@ -17,7 +27,7 @@ function MenuOption({ onClick, onShow, option }) {
     <div
       ref={element}
       className={`wx-cDCz9rZQ wx-option ${option.css || ''} ${option.disabled ? 'wx-disabled' : ''}`}
-      data-id={option.id}
+      data-id={setID(option.id)}
       onMouseEnter={onHover}
       onClick={onClick}
     >

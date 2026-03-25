@@ -28,8 +28,13 @@ function Menu({
   const [width, setWidth] = useState();
 
   const selfRef = useRef(null);
+  const onClickRef = useRef(onClick);
   const [showSub, setShowSub] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
+
+  useEffect(() => {
+    onClickRef.current = onClick;
+  }, [onClick]);
 
   const updatePosition = useCallback(() => {
     const result = calculatePosition(selfRef.current, parent, at, left, top);
@@ -51,8 +56,10 @@ function Menu({
 
   const cancel = useCallback(() => {
     // [deprecated] action will be deprecated in 3.0
-    onClick && onClick({ action: null, option: null });
-  }, [onClick]);
+    if (onClickRef.current) {
+      onClickRef.current({ action: null, option: null });
+    }
+  }, []);
 
   const onShow = useCallback((id, el) => {
     setShowSub(id);

@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 import { Portal } from '@svar-ui/react-core';
-import { id } from '@svar-ui/lib-dom';
+import { locateID } from '@svar-ui/lib-dom';
 import Menu from './Menu.jsx';
 import { filterMenu } from '../helpers';
 
@@ -27,6 +27,12 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
 
+  const attrName = useMemo(
+    () =>
+      `data-${dataKey.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`,
+    [dataKey],
+  );
+
   const filteredOptions = useMemo(() => {
     if (item !== null && filter) {
       return filterMenu(options, (v) => filter(v, item));
@@ -41,15 +47,6 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
     },
     [onClick],
   );
-
-  const getDataAttr = useCallback((node, name) => {
-    let v = null;
-    while (node && node.dataset && !v) {
-      v = node.dataset[name];
-      node = node.parentNode;
-    }
-    return v ? id(v) : null;
-  }, []);
 
   const show = useCallback(
     (ev, obj) => {
@@ -67,7 +64,7 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
       setTop(ev.clientY + 1);
 
       let nextItem =
-        typeof obj !== 'undefined' ? obj : getDataAttr(target, dataKey);
+        typeof obj !== 'undefined' ? obj : locateID(target, attrName);
       if (resolver) {
         nextItem = resolver(nextItem, ev);
         if (!nextItem) return;
@@ -78,7 +75,7 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
 
       ev.preventDefault();
     },
-    [dataKey, getDataAttr, resolver],
+    [attrName, resolver],
   );
 
   useImperativeHandle(ref, () => ({ show }), [show]);

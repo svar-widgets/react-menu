@@ -1,6 +1,6 @@
 {
   "name": "@svar-ui/react-menu",
-  "version": "2.4.3",
+  "version": "2.5.0",
   "description": "Lightweight React menu component for adding navigation, action, or context menus",
   "productTag": "menu",
   "type": "module",
@@ -52,9 +52,9 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "@svar-ui/core-locales": "2.4.0",
-    "@svar-ui/lib-dom": "0.11.1",
-    "@svar-ui/react-core": "2.4.3"
+    "@svar-ui/core-locales": "2.5.0",
+    "@svar-ui/lib-dom": "0.12.1",
+    "@svar-ui/react-core": "2.5.0"
   },
   "homepage": "https://svar.dev/react/core/",
   "repository": {
