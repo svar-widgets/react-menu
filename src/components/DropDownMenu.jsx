@@ -14,13 +14,29 @@ const DropDownMenu = forwardRef(function DropDownMenu(props, ref) {
 
   const [parent, setParent] = useState(null);
 
+  // Ref to the event that triggered the menu, used to
+  // prevent the menu from closing immediately after opening
+  const showEventRef = useRef(null);
+
   function handleClick(ev) {
     setParent(null);
     onClick && onClick(ev);
   }
 
+  function handleCancel(ev) {
+    // Prevent closing from the event that opened the menu
+    if (showEventRef.current === ev) {
+      showEventRef.current = null;
+      return;
+    }
+    setParent(null);
+    // [deprecated] action will be deprecated in 3.0
+    onClick && onClick({ action: null, option: null });
+  }
+
   const show = useCallback((ev) => {
     setParent(ev.target);
+    showEventRef.current = ev.nativeEvent || ev;
     ev.preventDefault();
   }, []);
 
@@ -34,15 +50,6 @@ const DropDownMenu = forwardRef(function DropDownMenu(props, ref) {
     }
   }
 
-  const parentKeyRef = useRef(0);
-  const lastParentRef = useRef(parent);
-  useEffect(() => {
-    if (lastParentRef.current !== parent) {
-      parentKeyRef.current += 1;
-      lastParentRef.current = parent;
-    }
-  }, [parent]);
-
   return (
     <>
       <span onClick={showAt} data-menu-ignore="true">
@@ -51,12 +58,12 @@ const DropDownMenu = forwardRef(function DropDownMenu(props, ref) {
       {parent ? (
         <Portal>
           <Menu
-            key={parentKeyRef.current}
             css={css}
             at={at}
             parent={parent}
             options={options}
             onClick={handleClick}
+            onCancel={handleCancel}
           />
         </Portal>
       ) : null}

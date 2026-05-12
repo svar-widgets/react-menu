@@ -3,6 +3,7 @@ import {
   useCallback,
   useImperativeHandle,
   useMemo,
+  useRef,
   useState,
 } from 'react';
 import { Portal } from '@svar-ui/react-core';
@@ -27,6 +28,10 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
 
+  // Ref to the event that triggered the menu, used to
+  // prevent the menu from closing immediately after opening
+  const showEventRef = useRef(null);
+
   const attrName = useMemo(
     () =>
       `data-${dataKey.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()}`,
@@ -40,13 +45,21 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
     return options;
   }, [item, filter, options]);
 
-  const handleClick = useCallback(
-    (ev) => {
-      setParent(null);
-      if (onClick) onClick(ev);
-    },
-    [onClick],
-  );
+  function handleClick(ev) {
+    setParent(null);
+    onClick && onClick(ev);
+  }
+
+  function handleCancel(ev) {
+    // Prevent closing from the event that opened the menu
+    if (showEventRef.current === ev) {
+      showEventRef.current = null;
+      return;
+    }
+    setParent(null);
+    // [deprecated] action will be deprecated in 3.0
+    onClick && onClick({ action: null, option: null });
+  }
 
   const show = useCallback(
     (ev, obj) => {
@@ -59,6 +72,14 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
 
       const target = ev.target;
       if (target && target.dataset && target.dataset.menuIgnore) return;
+
+      // Close if the same target is clicked again
+      if (parent && parent === target) {
+        setParent(null);
+        // Prevent browser context menu
+        ev.preventDefault();
+        return;
+      }
 
       setLeft(ev.clientX + 1);
       setTop(ev.clientY + 1);
@@ -73,9 +94,10 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
       setItem(nextItem);
       setParent(target);
 
+      showEventRef.current = ev.nativeEvent || ev;
       ev.preventDefault();
     },
-    [attrName, resolver],
+    [parent, attrName, resolver],
   );
 
   useImperativeHandle(ref, () => ({ show }), [show]);
@@ -99,6 +121,7 @@ const ActionMenu = forwardRef(function ActionMenu(props, ref) {
             parent={parent}
             context={item}
             onClick={handleClick}
+            onCancel={handleCancel}
             options={filteredOptions}
           />
         </Portal>

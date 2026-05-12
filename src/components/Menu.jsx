@@ -21,6 +21,7 @@ function Menu({
   context = null,
   css = '',
   onClick,
+  onCancel,
 }) {
   const [x, setX] = useState(-10000);
   const [y, setY] = useState(-10000);
@@ -28,13 +29,8 @@ function Menu({
   const [width, setWidth] = useState();
 
   const selfRef = useRef(null);
-  const onClickRef = useRef(onClick);
   const [showSub, setShowSub] = useState(false);
   const [activeOption, setActiveOption] = useState(null);
-
-  useEffect(() => {
-    onClickRef.current = onClick;
-  }, [onClick]);
 
   const updatePosition = useCallback(() => {
     const result = calculatePosition(selfRef.current, parent, at, left, top);
@@ -54,13 +50,6 @@ function Menu({
     setShowSub(false);
   }, []);
 
-  const cancel = useCallback(() => {
-    // [deprecated] action will be deprecated in 3.0
-    if (onClickRef.current) {
-      onClickRef.current({ action: null, option: null });
-    }
-  }, []);
-
   const onShow = useCallback((id, el) => {
     setShowSub(id);
     setActiveOption(el);
@@ -72,11 +61,26 @@ function Menu({
     updatePosition();
   }, [parent, updatePosition]);
 
+  // Callbacks in ref to prevent clickOutside from re-registering in its useEffect
+  const onClickRef = useRef(onClick);
+  const onCancelRef = useRef(onCancel);
+  useEffect(() => void (onClickRef.current = onClick), [onClick]);
+  useEffect(() => void (onCancelRef.current = onCancel), [onCancel]);
+
+  // Register click outside handler
   useEffect(() => {
     if (!selfRef.current) return;
-    return clickOutside(selfRef.current, { callback: cancel, modal: true })
-      .destroy;
-  }, [cancel]);
+    function callback(ev) {
+      // Call onCancel if provided, otherwise call onClick
+      if (onCancelRef.current) {
+        onCancelRef.current(ev);
+      } else if (onClickRef.current) {
+        // [deprecated] action will be deprecated in 3.0
+        onClickRef.current({ action: null, option: null });
+      }
+    }
+    return clickOutside(selfRef.current, { callback, modal: true }).destroy;
+  }, []);
 
   return (
     <div
@@ -119,6 +123,7 @@ function Menu({
               parent={activeOption}
               context={context}
               onClick={onClick}
+              onCancel={onCancel}
             />
           ) : null}
         </Fragment>

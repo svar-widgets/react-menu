@@ -1,3 +1,10 @@
+## 2.5.1
+
+### Fixes
+
+- ContextMenu doesn't open if the target changes
+- DropdownMenu fails to close when clicked outside
+
 ## 2.5.0
 
 ### Fixes
