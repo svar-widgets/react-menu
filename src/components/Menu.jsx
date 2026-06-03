@@ -6,7 +6,11 @@ import {
   useRef,
   useCallback,
 } from 'react';
-import { clickOutside, calculatePosition } from '@svar-ui/lib-dom';
+import {
+  clickOutside,
+  calculatePosition,
+  getPopupParents,
+} from '@svar-ui/lib-dom';
 import MenuOption from './MenuOption.jsx';
 import { prepareMenuData } from '../helpers';
 import './Menu.css';
@@ -37,9 +41,19 @@ function Menu({
     if (result) {
       setX(result.x);
       setY(result.y);
-      setZ(result.z);
       setWidth(result.width);
     }
+
+    let nextZ = result?.z ?? 20;
+    // stay above ancestor popups (anchor lives in original DOM, not the portal)
+    const parents = parent ? getPopupParents(parent) : [];
+    let popupZ = 0;
+    for (const node of parents) {
+      const zi = parseInt(getComputedStyle(node).zIndex, 10);
+      if (zi > popupZ) popupZ = zi;
+    }
+    if (popupZ >= nextZ) nextZ = popupZ + 1;
+    setZ(nextZ);
   }, [parent, at, left, top]);
 
   useEffect(() => {
@@ -64,8 +78,10 @@ function Menu({
   // Callbacks in ref to prevent clickOutside from re-registering in its useEffect
   const onClickRef = useRef(onClick);
   const onCancelRef = useRef(onCancel);
+  const parentRef = useRef(parent);
   useEffect(() => void (onClickRef.current = onClick), [onClick]);
   useEffect(() => void (onCancelRef.current = onCancel), [onCancel]);
+  useEffect(() => void (parentRef.current = parent), [parent]);
 
   // Register click outside handler
   useEffect(() => {
@@ -79,7 +95,11 @@ function Menu({
         onClickRef.current({ action: null, option: null });
       }
     }
-    return clickOutside(selfRef.current, { callback, modal: true }).destroy;
+    return clickOutside(selfRef.current, {
+      callback,
+      modal: true,
+      parent: () => parentRef.current,
+    }).destroy;
   }, []);
 
   return (

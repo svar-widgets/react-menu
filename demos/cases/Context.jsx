@@ -28,7 +28,7 @@ export default function Context() {
         <ContextMenu options={options} onClick={clicked} at="point">
           <div
             className="wx-WCEK9S2T double-box"
-            style={{ padding: '20px', background: '#ddd' }}
+            style={{ padding: '20px', background: 'var(--wx-background-alt)' }}
           >
             Click me (outer menu)
             <br />
@@ -42,7 +42,7 @@ export default function Context() {
                   display: 'inline-block',
                   width: '150px',
                   padding: '10px',
-                  background: '#fff',
+                  background: 'var(--wx-background)',
                 }}
               >
                 (inner menu)

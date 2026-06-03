@@ -1,3 +1,9 @@
+## 2.6.0
+
+### Fixes
+
+- Duplicate separators are auto removed
+
 ## 2.5.1
 
 ### Fixes
