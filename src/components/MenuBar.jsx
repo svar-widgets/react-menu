@@ -4,7 +4,7 @@ import { prepareMenuData } from '../helpers';
 import './MenuBar.css';
 
 function MenuBar(props) {
-  const { css = '', menuCss = '', options, onClick } = props;
+  const { css = '', menuCss = '', options = [], onClick } = props;
 
   const finalOptions = useMemo(() => prepareMenuData(options), [options]);
 

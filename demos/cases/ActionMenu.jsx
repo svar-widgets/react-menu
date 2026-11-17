@@ -42,11 +42,8 @@ export default function ActionMenu() {
       />
       {active.map((item, i) => (
         <React.Fragment key={i}>
-          <Button
-            onClick={(ev) => menu.current && menu.current.show(ev, i)}
-            value={active[i]}
-          >
-            {byId(item).text}
+          <Button onClick={(ev) => menu.current && menu.current.show(ev, i)}>
+            {byId(item)?.text}
           </Button>
           &nbsp;
         </React.Fragment>

@@ -16,7 +16,7 @@ import { prepareMenuData } from '../helpers';
 import './Menu.css';
 
 function Menu({
-  options,
+  options = [],
   left = 0,
   top = 0,
   at = 'bottom',
@@ -37,6 +37,7 @@ function Menu({
   const [activeOption, setActiveOption] = useState(null);
 
   const updatePosition = useCallback(() => {
+    if (!selfRef.current) return;
     const result = calculatePosition(selfRef.current, parent, at, left, top);
     if (result) {
       setX(result.x);

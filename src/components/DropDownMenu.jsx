@@ -9,7 +9,7 @@ import { Portal } from '@svar-ui/react-core';
 import Menu from './Menu.jsx';
 
 const DropDownMenu = forwardRef(function DropDownMenu(props, ref) {
-  const { options, at = 'bottom', css = '', children, onClick } = props;
+  const { options = [], at = 'bottom', css = '', children, onClick } = props;
 
   const [parent, setParent] = useState(null);
 

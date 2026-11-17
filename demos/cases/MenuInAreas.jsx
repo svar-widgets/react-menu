@@ -59,9 +59,8 @@ export default function MenuInAreas() {
               <React.Fragment key={i}>
                 <Button
                   onClick={(ev) => menu1.current && menu1.current.show(ev, i)}
-                  value={active[i]}
                 >
-                  {byId(item).text}
+                  {byId(item)?.text}
                 </Button>
               </React.Fragment>
             ))}
@@ -87,9 +86,8 @@ export default function MenuInAreas() {
               <React.Fragment key={i}>
                 <Button
                   onClick={(ev) => menu2.current && menu2.current.show(ev, i)}
-                  value={active[i]}
                 >
-                  {byId(item).text}
+                  {byId(item)?.text}
                 </Button>
               </React.Fragment>
             ))}
@@ -116,9 +114,8 @@ export default function MenuInAreas() {
               <React.Fragment key={i}>
                 <Button
                   onClick={(ev) => menu3.current && menu3.current.show(ev, i)}
-                  value={active[i]}
                 >
-                  {byId(item).text}
+                  {byId(item)?.text}
                 </Button>
               </React.Fragment>
             ))}

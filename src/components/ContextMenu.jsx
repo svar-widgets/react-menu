@@ -3,7 +3,7 @@ import ActionMenu from './ActionMenu.jsx';
 
 const ContextMenu = forwardRef(function ContextMenu(props, ref) {
   const {
-    options,
+    options = [],
     at = 'bottom',
     resolver = null,
     dataKey = 'contextId',

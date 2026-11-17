@@ -30,7 +30,7 @@ export default function ActionHandler() {
   const getItem = (id) => {
     const item = items.find((a) => a.id == id);
 
-    if (item.disabled) return null;
+    if (!item || item.disabled) return null;
     return item;
   };
 

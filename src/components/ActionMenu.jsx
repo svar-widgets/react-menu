@@ -13,7 +13,7 @@ import { filterMenu } from '../helpers';
 
 const ActionMenu = forwardRef(function ActionMenu(props, ref) {
   const {
-    options,
+    options = [],
     at = 'bottom',
     resolver = null,
     dataKey = 'contextId',

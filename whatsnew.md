@@ -1,3 +1,9 @@
+## 2.6.2
+
+### Fixes
+
+- Menu components throw an error when rendered without options
+
 ## 2.6.1
 
 - Using React Core v2.6.1
